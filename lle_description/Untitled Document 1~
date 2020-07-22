@@ -1,0 +1,887 @@
+﻿<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lle">
+ xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+
+<xacro:include filename="$(find lle_description)/urdf/materials.xacro"/>
+<xacro:include filename="$(find lle_description)/urdf/lle.gazebo"/>
+<xacro:include filename="$(find lle_description)/urdf/bar.xacro"/>
+
+
+<link name="world"/>
+
+
+<!--human model-->
+
+<joint name="human_base_joint" type="floating">
+    <parent link="world"/>
+<origin xyz="0 0 0.0" rpy="0 0 0"/>
+    <child link="human_chest"/>
+</joint>
+<link name="human_chest">
+          <visual>
+              <origin xyz="0.27 -0.08 0.845" rpy="1.57 0 3.1415"/>
+              <geometry>
+              <mesh  scale="0.001 0.0009 0.00075"
+          filename="package://lle_description/meshes/Chest.STL" />            
+              </geometry>
+              <material name="yellow">
+              <color rgba="0 0 1 5"/>              
+              </material>
+          </visual>    
+      <collision>
+        <origin xyz="0.27 -0.08 0.845" rpy="1.57 0 3.1415"/>
+        <geometry>
+         <mesh scale="0.001 0.0009 0.00075"
+          filename="package://lle_description/meshes/Chest.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+        value="37.6936" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="1.3080"
+        iyz="0"
+        izz="0.015853003043962" />
+</inertial>
+</link>
+
+<link name="human_neck">
+          <visual>
+              <origin xyz="0.079 -0.05 1.28" rpy="1.57 0 3.1415"/>
+              <geometry>
+              <mesh  scale="0.0009 0.0009 0.0009"
+          filename="package://lle_description/meshes/neck.STL" />            
+              </geometry>
+              <material name="green">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+        <origin xyz="0.079 -0.05 1.28" rpy="1.57 0 3.1415"/>
+        <geometry>
+         <mesh scale="0.0009 0.0009 0.0009"
+          filename="package://lle_description/meshes/neck.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+        value="0.478425130329681" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="-3.18755438710738E-17"
+        ixz="-6.24500451351651E-17"
+        iyy="0.0176625083227497"
+        iyz="-0.000444787144430361"
+        izz="0.015853003043962" />
+</inertial>
+</link>
+
+<joint name="human_neck_joint" type="fixed">
+    <parent link="human_chest"/>
+    <child link="human_neck"/>
+</joint>
+
+<link name="human_head">
+          <visual>
+              <origin xyz="0.1 0 1.22" rpy="1.4 0 3.1415"/>
+              <geometry>
+              <mesh  scale="0.0009 0.0009 0.0009"
+          filename="package://lle_description/meshes/Head.STL" />            
+              </geometry>
+              <material name="red">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+        <origin xyz="0.1 0 1.22" rpy="1.4 0 3.1415"/>
+        <geometry>
+         <mesh scale="0.0009 0.0009 0.0009"
+          filename="package://lle_description/meshes/Head.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+        value="5.41" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="0.0248"
+        iyz="0"
+        izz="0.015853003043962" />
+</inertial>
+</link>
+
+<joint name="human_head_joint" type="fixed">
+    <parent link="human_neck"/>
+    <child link="human_head"/>
+</joint>
+
+
+<link name="human_left_upper_arm">
+          <visual>
+              <origin xyz="0 0 1.075" rpy="1.4 0 3.1415"/>
+              <geometry>
+              <mesh  scale="0.001 0.0009 0.00075"
+          filename="package://lle_description/meshes/UpperArm.STL" />            
+              </geometry>
+              <material name="red">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+        <origin xyz="0 0 1.075" rpy="1.4 0 3.1415"/>
+        <geometry>
+         <mesh scale="0.001 0.0009 0.00075"
+          filename="package://lle_description/meshes/UpperArm.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+        value="2.0034" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="0.0213"
+        iyz="0"
+        izz="0.0015853003043962" />
+</inertial>
+</link>
+
+<joint name="human_left_upper_arm_joint" type="fixed">
+<parent link="human_chest"/>
+<child link="human_left_upper_arm"/>
+</joint>
+
+
+<link name="human_right_upper_arm">
+          <visual>
+              <origin xyz="0.045 0.11 1.085" rpy="1.6 0 0"/>
+              <geometry>
+              <mesh  scale="0.001 0.0009 0.00075"
+          filename="package://lle_description/meshes/UpperArm.STL" />            
+              </geometry>
+              <material name="red">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+       <origin xyz="0.045 0.11 1.085" rpy="1.6 0 0"/>
+        <geometry>
+         <mesh scale="0.001 0.0009 0.00075"
+          filename="package://lle_description/meshes/UpperArm.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+        value="2.0034" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="0.0213"
+        iyz="0"
+        izz="0.0015853003043962" />
+</inertial>
+</link>
+
+<joint name="human_right_upper_arm_joint" type="fixed">
+<parent link="human_chest"/>
+<child link="human_right_upper_arm"/>
+</joint>
+
+
+
+<link name="human_left_lower_arm">
+          <visual>
+              <origin xyz="0 0.33 1" rpy="0.2 0 3.1415"/>
+              <geometry>
+              <mesh  scale="0.001 0.0009 0.00075"
+          filename="package://lle_description/meshes/LowerArm.STL" />            
+              </geometry>
+              <material name="red">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+       <origin xyz="0 0.33 1" rpy="0.2 0 3.1415"/>
+        <geometry>
+         <mesh scale="0.001 0.0009 0.00075"
+          filename="package://lle_description/meshes/LowerArm.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+        value="0.7552" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="0.076"
+        iyz="0"
+        izz="0.0011853003043962" />
+</inertial>
+</link>
+
+<joint name="human_left_lower_arm_joint" type="fixed">
+<parent link="human_left_upper_arm"/>
+<child link="human_left_lower_arm"/>
+</joint>
+
+<link name="human_right_lower_arm">
+          <visual>
+              <origin xyz="0.55 0.33 1" rpy="0.2 0 3.1415"/>
+              <geometry>
+              <mesh  scale="0.001 0.0009 0.00075"
+          filename="package://lle_description/meshes/LowerArm.STL" />            
+              </geometry>
+              <material name="red">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+        <origin xyz="0.55 0.33 1" rpy="0.2 0 3.1415"/>
+        <geometry>
+         <mesh scale="0.001 0.0009 0.00075"
+          filename="package://lle_description/meshes/LowerArm.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+        value="0.7552" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="0.076"
+        iyz="0"
+        izz="0.0011853003043962" />
+</inertial>
+</link>
+
+<joint name="human_right_lower_arm_joint" type="fixed">
+<parent link="human_right_upper_arm"/>
+<child link="human_right_lower_arm"/>
+</joint>
+
+
+
+<link name="human_tight_left">
+          <visual>
+              <origin xyz="0.12 0.13 -1.36" rpy="1.7 0 0"/>
+              <geometry>
+              <mesh  scale="0.0009 0.00070 0.00075"
+          filename="package://lle_description/meshes/Thigh.STL" />            
+              </geometry>
+              <material name="red">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+        <origin xyz="0.12 0.13 -1.36" rpy="1.7 0 0"/>
+        <geometry>
+         <mesh scale="0.0009 0.00070 0.00075"
+          filename="package://lle_description/meshes/Thigh.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+        value="7.33" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="0.1502"
+        iyz="0"
+        izz="0.0015853003043962" />
+</inertial>
+</link>
+
+<joint name="human_tight_left_joint" type="fixed">
+<parent link="left_femur"/>
+<child link="human_tight_left"/>
+<origin xyz="0 0 0.95" rpy="0 0.04 0"/>
+
+
+</joint>
+
+<link name="human_calf_left">
+          <visual>
+              <origin xyz="-0.03 0.01 0.035" rpy="1.45 0.026 0"/>
+              <geometry>
+              <mesh  scale="0.0009 0.0008 0.00075"
+          filename="package://lle_description/meshes/Calf.STL" />            
+              </geometry>
+              <material name="green">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+         <origin xyz="-0.03 0.01 0.035" rpy="1.45 0.026 0"/>
+        <geometry>
+         <mesh scale="0.0009 0.0008 0.00075"
+          filename="package://lle_description/meshes/Calf.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+       value="3.4503" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="0.0505"
+        iyz="0"
+        izz="0.010853003043962" />
+</inertial>
+</link>
+
+<joint name="human_calf_left_joint" type="fixed">
+<parent link="left_leg"/>
+<child link="human_calf_left"/>
+<origin xyz="0 0 -0.45" rpy="0 0 0"/>
+
+</joint>
+
+
+<link name="human_foot_left">
+          <visual>
+              <origin xyz="0.17 -0.06 0.36" rpy="1.57 0 3.1415"/>
+              <geometry>
+              <mesh  scale="0.0009 0.0009 0.00075"
+          filename="package://lle_description/meshes/Foot.STL" />            
+              </geometry>
+              <material name="red">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+        <origin xyz="0.17 -0.06 0.36" rpy="1.57 0 3.1415"/>
+        <geometry>
+         <mesh scale="0.0009 0.0009 0.00075"
+          filename="package://lle_description/meshes/Foot.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+        value="1.07" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="0.0038"
+        iyz="0"
+        izz="0.0015853003043962" />
+</inertial>
+</link>
+
+<joint name="human_foot_left_joint" type="fixed">
+<parent link="left_foot"/>
+<child link="human_foot_left"/>
+<origin xyz="0 0 -0.45" rpy="0 0 0"/>
+
+</joint>
+
+
+
+
+<!--right leg of human model-->
+
+<link name="human_tight_right">
+          <visual>
+              <origin xyz="-0.28 0.13 -1.36" rpy="1.7 0 0"/>
+              <geometry>
+              <mesh  scale="0.0009 0.00070 0.00075"
+          filename="package://lle_description/meshes/Thigh.STL" />            
+              </geometry>
+              <material name="red">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+        <origin xyz="-0.28 0.13 -1.36" rpy="1.7 0 0"/>
+        <geometry>
+         <mesh scale="0.0009 0.00070 0.00075"
+          filename="package://lle_description/meshes/Thigh.STL" />              
+          </geometry>
+</collision>
+<inertial>
+    <mass
+        value="7.33" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="0.1502"
+        iyz="0"
+        izz="0.0015853003043962" />
+</inertial>
+</link>
+
+<joint name="human_tight_right_joint" type="fixed">
+<parent link="right_femur"/>
+<child link="human_tight_right"/>
+<origin xyz="0 0 0.95" rpy="0 -0.04 0"/>
+
+</joint>
+
+<link name="human_calf_right">
+          <visual>
+              <origin xyz="-0.225 0.01 0.035" rpy="1.45 -0.026 0"/>
+              <geometry>
+              <mesh  scale="0.0009 0.0008 0.00075"
+          filename="package://lle_description/meshes/Calf.STL" />            
+              </geometry>
+              <material name="green">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+        <origin xyz="-0.225 0.01 0.035" rpy="1.45 -0.026 0"/>
+        <geometry>
+         <mesh scale="0.0009 0.0008 0.00075"
+          filename="package://lle_description/meshes/Calf.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+       value="3.4503" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="0.0505"
+        iyz="0"
+        izz="0.010853003043962" />
+</inertial>
+</link>
+
+<joint name="human_calf_right_joint" type="fixed">
+<parent link="right_leg"/>
+<child link="human_calf_right"/>
+<origin xyz="0 0 -0.45" rpy="0 0 0"/>
+
+</joint>
+
+
+<link name="human_foot_right">
+          <visual>
+              <origin xyz="0.055 -0.06 0.36" rpy="1.57 0 3.1415"/>
+              <geometry>
+              <mesh  scale="0.0009 0.0009 0.00075"
+          filename="package://lle_description/meshes/Foot.STL" />            
+              </geometry>
+              <material name="red">
+              <color rgba=".2 .2 .2 1"/>              
+              </material>
+          </visual>    
+      <collision>
+       <origin xyz="0.055 -0.06 0.36" rpy="1.57 0 3.1415"/>
+        <geometry>
+          <mesh  scale="0.0009 0.0009 0.00075"
+          filename="package://lle_description/meshes/Foot.STL" />              
+          </geometry>
+</collision>
+<inertial>
+    <mass
+        value="1.07" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="0"
+        ixz="0"
+        iyy="0.0038"
+        iyz="0"
+        izz="0.0015853003043962" />
+</inertial>
+</link>
+
+<joint name="human_foot_right_joint" type="fixed">
+<parent link="right_foot"/>
+<child link="human_foot_right"/>
+<origin xyz="0 0 -0.45" rpy="0 0 0"/>
+
+</joint>
+
+
+<joint name="human_bar_right_joint" type="prismatic">
+<parent link="human_right_lower_arm"/>
+<child link="bar_right"/>
+<origin rpy="0 0 0" xyz="0 0 0"/>
+<axis xyz="0 1 0"/>
+ <limit effort="0" lower="-200" upper="0" velocity="2"/>
+</joint>
+
+<joint name="human_bar_left_joint" type="prismatic">
+<parent link="human_left_lower_arm"/>
+<child link="bar_left"/>
+<origin rpy="0 0 0" xyz="0 0 0"/>
+<axis xyz="0 1 0"/>
+ <limit effort="0" lower="-200" upper="0" velocity="2"/>
+</joint>
+
+
+
+
+
+
+
+
+
+
+<!-- description of LLE-->
+
+<joint name="joint_base" type="fixed">
+    <parent link="human_chest"/>
+    <child link="base_link"/>
+</joint>
+
+<link name="base_link">
+          <visual>
+              <origin xyz="0.193 -0.26 0.845" rpy="0 0 3.14"/>
+              <geometry>
+              <mesh
+          filename="package://lle_description/meshes/base_link.STL" />            
+              </geometry>
+              <material name="blue">
+              <color rgba="0 0 1 1"/>              
+              </material>
+          </visual>    
+      <collision>
+        <origin xyz="0.193 -0.26 0.845" rpy="0 0 3.14"/>
+        <geometry>
+         <mesh
+          filename="package://lle_description/meshes/base_link.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+        value="0.478425130329681" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="-3.18755438710738E-17"
+        ixz="-6.24500451351651E-17"
+        iyy="0.0176625083227497"
+        iyz="-0.000444787144430361"
+        izz="0.015853003043962" />
+</inertial>
+</link>
+
+
+
+
+
+
+
+
+
+<!-- Right femur-->
+  <link name="right_femur">
+        <visual>
+          <origin xyz="-0.025 0 0.00" rpy="3.14 1.57 0"/>
+          <geometry>
+            <mesh
+          filename="package://lle_description/meshes/right_femur.STL" />      
+          </geometry> 
+<material name="darkgray">
+<color rgba=".2 .2 .2 1"/>
+</material>
+        </visual>
+<collision>
+              <origin xyz="-0.025 0 0.00" rpy="3.14 1.57 0"/>
+              <geometry>
+                 <mesh
+          filename="package://lle_description/meshes/right_femur.STL" />  
+          </geometry>  
+</collision>
+<inertial>
+              <mass
+        value="0.29439" />
+      <inertia
+        ixx="0.00012141"
+        ixy="-5.9435E-08"
+        ixz="6.4283E-05"
+        iyy="0.0057442"
+        iyz="4.0889E-10"
+        izz="0.0058564" />
+</inertial>
+    </link>
+
+<joint name="j_hip_r" type="revolute">
+<parent link="base_link"/>
+<child link="right_femur"/>
+<origin xyz="0.26 0 0.885" rpy="-0.032 0 0"/>
+<axis xyz="1 0 0"/>
+ <limit effort="60000" velocity="0.1" lower="-2.5" upper="2.5" />    
+</joint>
+
+<!-- Right Leg-->
+  <link name="right_leg">
+        <visual>
+          <origin xyz="-0.045 0 0.0" rpy="1.57 0 1.57"/>
+          <geometry>
+           <mesh
+          filename="package://lle_description/meshes/right_leg.STL" />  
+          </geometry> 
+<material name="darkgray">
+<color rgba=".2 .2 .2 1"/>
+</material>
+        </visual>
+<collision>
+              <origin xyz="-.045 0 0.0" rpy="1.57 0 1.57"/>
+              <geometry>
+                <mesh
+          filename="package://lle_description/meshes/right_leg.STL" />
+          </geometry>  
+</collision>
+<inertial>
+            <mass
+        value="0.21595" />
+      <inertia
+        ixx="0.0043362"
+        ixy="6.0023E-08"
+        ixz="6.8343E-10"
+        iyy="8.6947E-05"
+        iyz="-9.425E-05"
+        izz="0.0044098" />
+</inertial>
+    </link>
+
+<joint name="j_knee_r" type="revolute">
+<parent link="right_femur"/>
+<child link="right_leg"/>
+<origin xyz="0.02 0 -0.41" rpy="0 0 0"/>
+<axis xyz="1 0 0"/>
+ <limit effort="60000" velocity="0.2" lower="-2.5" upper="0" />
+</joint>
+
+
+
+<link name="right_foot">
+	<visual>
+	<origin xyz="0.02 0.00 0" rpy="1.57 0 -1.57"/>
+	<geometry>
+	<mesh scale="1 1 1.3"
+          filename="package://lle_description/meshes/right_foot.STL" />     
+	</geometry> 
+	<material name="darkgray">
+	<color rgba=".2 .2 .2 1"/>
+	</material>
+	</visual>
+	<collision>
+	<origin xyz="0.02 0.00 0" rpy="1.57 0 -1.57"/>
+	<geometry>
+	<mesh
+          filename="package://lle_description/meshes/right_foot.STL" />       
+	</geometry>  
+	</collision>
+	<inertial>
+	<mass
+        value="0.11504" />
+      <inertia
+        ixx="0.00029867"
+        ixy="-0.00010337"
+        ixz="5.7733E-05"
+        iyy="0.00039778"
+        iyz="6.4408E-05"
+        izz="0.00044294" />
+	</inertial>
+</link>
+<joint name="j_foot_r" type="revolute">
+	<parent link="right_leg"/>
+	<child link="right_foot"/>
+	<origin xyz="-0.065 0 -0.403" rpy="0 0 0"/>
+ 	<limit effort="60000" velocity="0.2" lower="-1" upper="1" />
+	<axis xyz="1 0 0"/>
+</joint>
+
+<!-- Left Leg-->
+
+<!-- Left femur-->
+<link name="left_femur">
+      	 <visual>
+     	 <origin xyz="0.494 0 0.0" rpy="3.14 1.57 0"/>
+ 	<geometry>
+     	  <mesh
+          filename="package://lle_description/meshes/left_femur.STL" />         
+    	 </geometry> 
+	<material name="darkgray">
+	<color rgba=".2 .2 .2 1"/>
+	</material>
+        </visual>
+	<collision>
+        <origin xyz="0.494 0 0.0" rpy="3.14 1.57 0"/>
+        <geometry>
+        <mesh
+          filename="package://lle_description/meshes/left_femur.STL" />        
+        </geometry>  
+	</collision>
+	<inertial>
+	<mass
+        value="0.29439" />
+        <inertia
+        ixx="0.0001284"
+        ixy="0.00019812"
+        ixz="-6.4243E-05"
+        iyy="0.0057373"
+        iyz="2.2662E-06"
+        izz="0.0058564" />
+	</inertial>
+</link>
+
+<joint name="j_hip_l" type="revolute">
+<parent link="base_link"/>
+<child link="left_femur"/>
+<origin xyz="-0.26 0 0.885" rpy="0 0 0"/>
+<axis xyz="1 0 0"/>
+ <limit effort="60000" velocity="0.2" lower="-2.5" upper="2.5" />
+        
+</joint>
+
+
+<link name="left_leg">
+	<visual>
+	<origin xyz="0.0 0.00 0.00" rpy="1.57 0 -1.57"/>
+	<geometry>
+	<mesh
+          filename="package://lle_description/meshes/left_leg.STL" />         
+	</geometry> 
+	<material name="darkgray">
+	<color rgba=".2 .2 .2 1"/>
+	</material>
+	</visual>
+	<collision>
+	<origin xyz="0.0 0.0 0.0" rpy="1.57 0 -1.57"/>
+	<geometry>
+	<mesh
+          filename="package://lle_description/meshes/left_leg.STL" />
+	</geometry>  
+	</collision>
+	<inertial>
+	<mass
+        value="0.21595" />
+      <inertia
+        ixx="0.0043362"
+        ixy="5.9528E-08"
+        ixz="6.7246E-10"
+        iyy="8.6947E-05"
+        iyz="-9.425E-05"
+        izz="0.0044098" />
+	</inertial>
+</link>
+
+<joint name="j_knee_l" type="revolute">
+	<parent link="left_femur"/>
+	<child link="left_leg"/>
+	<origin xyz="0.075 0.015 -0.409" rpy="0 0 0"/>
+	<axis xyz="1 0 0"/>
+ 	<limit effort="60000" velocity="0.2" lower="-2.5" upper="0" />
+</joint>
+
+<link name="left_foot">
+        <visual>
+        <origin xyz="0.0 0.00 0" rpy="1.57 0 1.57"/>
+        <geometry>
+        <mesh scale="1 1 1.3"
+          filename="package://lle_description/meshes/left_foot.STL" />
+
+        </geometry> 
+	<material name="darkgray">
+	<color rgba=".2 .2 .2 1"/>
+	</material>
+        </visual>
+	<collision>
+	<origin xyz="0.0 0.00 0" rpy="1.57 0 1.57"/>
+	<geometry>
+	<mesh
+          filename="package://lle_description/meshes/left_foot.STL" />         
+	</geometry>  
+	</collision>
+	<inertial>
+	 <mass
+        value="0.11504" />
+      <inertia
+        ixx="0.00029867"
+        ixy="-0.00010337"
+        ixz="5.7733E-05"
+        iyy="0.00039778"
+        iyz="6.4408E-05"
+        izz="0.00044294" />
+	</inertial>
+</link>
+
+<joint name="j_foot_l" type="revolute">
+<parent link="left_leg"/>
+<child link="left_foot"/>
+<origin xyz="0 0 -0.403" rpy="0 0 0"/>
+ <limit effort="60000" velocity="0.2" lower="-1" upper="1" />
+<axis xyz="1 0 0"/>
+</joint>
+
+<transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_hip_r">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_hip_l">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_knee_r">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_knee_l">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<transmission name="tran5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_foot_l">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+</transmission>
+<transmission name="tran6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_foot_r">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor6">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+</transmission>
+</robot>

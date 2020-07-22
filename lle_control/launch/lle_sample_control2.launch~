@@ -1,0 +1,22 @@
+<launch>
+
+<!-- Load joint controller configurations from YAML file to parameter server -->
+<rosparam file="$(find lle_control)/config/lle_control.yaml"/>
+
+  <!-- load the controllers -->
+  <node name="lle_sample_control2" pkg="controller_manager" type="spawner" respawn="false"
+	output="screen" ns="/lle_sample" args="--namespace=/lle_sample joint_state_controller
+joint_right_hip_position_controller
+joint_left_hip_position_controller
+joint_right_knee_position_controller
+joint_left_knee_position_controller
+--timeout 100"/>
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+	respawn="false" output="screen">
+
+    <remap from="/joint_states" to="/lle/joint_states" />
+ 
+ </node>
+</launch>

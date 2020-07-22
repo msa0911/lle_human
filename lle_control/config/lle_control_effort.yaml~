@@ -1,0 +1,38 @@
+lle:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100 
+  
+  # Efford Controllers ---------------------------------------
+  j_hip_r_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: j_hip_r
+    
+
+  j_knee_r_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: j_knee_r
+    
+
+  j_hip_l_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: j_hip_l
+    
+
+  j_knee_l_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: j_knee_l
+    
+
+  j_foot_l_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: j_foot_l
+    
+
+  j_foot_r_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: j_foot_r
+
+
+    

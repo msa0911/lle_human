@@ -1,0 +1,355 @@
+﻿<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lle">
+ xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+
+<xacro:include filename="$(find lle_description)/urdf/materials.xacro"/>
+<xacro:include filename="$(find lle_description)/urdf/lle.gazebo"/>
+
+<link name="world"/>
+<joint name="joint_base" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+</joint>
+
+
+<link name="base_link">
+          <visual>
+              <origin xyz="0.193 -0.26 0.845" rpy="0 0 3.14"/>
+              <geometry>
+              <mesh
+          filename="package://lle_description/meshes/base_link.STL" />            
+              </geometry>
+              <material name="blue">
+              <color rgba="0 0 1 1"/>              
+              </material>
+          </visual>    
+      <collision>
+        <origin xyz="0.193 -0.26 0.845" rpy="0 0 3.14"/>
+        <geometry>
+         <mesh
+          filename="package://lle_description/meshes/base_link.STL" />              
+          </geometry>
+</collision>
+<inertial>
+   <mass
+        value="0.478425130329681" />
+      <inertia
+        ixx="0.00301717973628494"
+        ixy="-3.18755438710738E-17"
+        ixz="-6.24500451351651E-17"
+        iyy="0.0176625083227497"
+        iyz="-0.000444787144430361"
+        izz="0.015853003043962" />
+</inertial>
+</link>
+
+
+
+
+<!-- Right femur-->
+  <link name="right_femur">
+        <visual>
+          <origin xyz="-0.025 0 0.00" rpy="3.14 1.57 0"/>
+          <geometry>
+            <mesh
+          filename="package://lle_description/meshes/right_femur.STL" />      
+          </geometry> 
+<material name="darkgray">
+<color rgba=".2 .2 .2 1"/>
+</material>
+        </visual>
+<collision>
+              <origin xyz="-0.025 0 0.00" rpy="3.14 1.57 0"/>
+              <geometry>
+                 <mesh
+          filename="package://lle_description/meshes/right_femur.STL" />  
+          </geometry>  
+</collision>
+<inertial>
+              <mass
+        value="0.29439" />
+      <inertia
+      ixx="0.0058564"
+        ixy="6.4283E-05"
+        ixz="-5.9435E-08"
+        iyy="0.0057442"
+        iyz="4.0889E-10"
+        izz="0.00012141" />
+</inertial>
+    </link>
+
+<joint name="j_hip_r" type="revolute">
+<parent link="base_link"/>
+<child link="right_femur"/>
+<origin xyz="0.26 0 0.885" rpy="0 0 0"/>
+<axis xyz="1 0 0"/>
+ <limit effort="10" velocity="0.5" lower="-2.5" upper="2.5" />
+    
+</joint>
+
+<!-- Right Leg-->
+  <link name="right_leg">
+        <visual>
+          <origin xyz="-0.045 0 0.0" rpy="1.57 0 1.57"/>
+          <geometry>
+           <mesh
+          filename="package://lle_description/meshes/right_leg.STL" />  
+          </geometry> 
+<material name="darkgray">
+<color rgba=".2 .2 .2 1"/>
+</material>
+        </visual>
+<collision>
+              <origin xyz="-.045 0 0.0" rpy="1.57 0 1.57"/>
+              <geometry>
+                <mesh
+          filename="package://lle_description/meshes/right_leg.STL" />
+          </geometry>  
+</collision>
+<inertial>
+            <mass
+        value="0.21595" />
+      <inertia
+        ixx="0.0044098"
+        ixy="6.0023E-08"
+        ixz="6.8343E-10"
+        iyy="0.0043362"
+        iyz="-9.425E-05"
+        izz="8.6947E-05" />
+</inertial>
+    </link>
+
+<joint name="j_knee_r" type="revolute">
+<parent link="right_femur"/>
+<child link="right_leg"/>
+<origin xyz="0.02 0 -0.41" rpy="0 0 0"/>
+<axis xyz="1 0 0"/>
+ <limit effort="10" velocity="0.5" lower="-2.5" upper="2.5" />
+</joint>
+
+
+
+<link name="right_foot">
+	<visual>
+	<origin xyz="0.02 0.00 0" rpy="1.57 0 -1.57"/>
+	<geometry>
+	<mesh
+          filename="package://lle_description/meshes/right_foot.STL" />     
+	</geometry> 
+	<material name="darkgray">
+	<color rgba=".2 .2 .2 1"/>
+	</material>
+	</visual>
+	<collision>
+	<origin xyz="0.02 0.00 0" rpy="1.57 0 -1.57"/>
+	<geometry>
+	<mesh
+          filename="package://lle_description/meshes/right_foot.STL" />       
+	</geometry>  
+	</collision>
+	<inertial>
+	<mass
+        value="0.11504" />
+      <inertia
+        ixx="0.00029867"
+        ixy="-0.00010337"
+        ixz="5.7733E-05"
+        iyy="0.00039778"
+        iyz="6.4408E-05"
+        izz="0.00044294" />
+	</inertial>
+</link>
+<joint name="j_foot_r" type="revolute">
+	<parent link="right_leg"/>
+	<child link="right_foot"/>
+	<origin xyz="-0.065 0 -0.403" rpy="0 0 0"/>
+ 	<limit effort="10" velocity="0.5" lower="-1" upper="1" />
+	<axis xyz="1 0 0"/>
+</joint>
+
+<!-- Left Leg-->
+
+<!-- Left femur-->
+<link name="left_femur">
+      	 <visual>
+     	 <origin xyz="0.494 0 0.0" rpy="3.14 1.57 0"/>
+ 	<geometry>
+     	  <mesh
+          filename="package://lle_description/meshes/left_femur.STL" />         
+    	 </geometry> 
+	<material name="darkgray">
+	<color rgba=".2 .2 .2 1"/>
+	</material>
+        </visual>
+	<collision>
+        <origin xyz="0.494 0 0.0" rpy="3.14 1.57 0"/>
+        <geometry>
+        <mesh
+          filename="package://lle_description/meshes/left_femur.STL" />        
+        </geometry>  
+	</collision>
+	<inertial>
+	<mass
+        value="0.29439" />
+        <inertia
+       ixx="0.0058564"
+        ixy="-5.9435E-08"
+        ixz="6.4283E-05"
+        iyy="0.0057442"
+        iyz="4.0889E-10"
+        izz="0.00012141" />
+	</inertial>
+</link>
+
+<joint name="j_hip_l" type="revolute">
+<parent link="base_link"/>
+<child link="left_femur"/>
+<origin xyz="-0.26 0 0.885" rpy="-0.02 0 0"/>
+<axis xyz="1 0 0"/>
+ <limit effort="10" velocity="0.5" lower="-2.5" upper="2.5" />
+        
+</joint>
+
+
+<link name="left_leg">
+	<visual>
+	<origin xyz="0.0 0.00 0.00" rpy="1.57 0 -1.57"/>
+	<geometry>
+	<mesh
+          filename="package://lle_description/meshes/left_leg.STL" />         
+	</geometry> 
+	<material name="darkgray">
+	<color rgba=".2 .2 .2 1"/>
+	</material>
+	</visual>
+	<collision>
+	<origin xyz="0.0 0.0 0.0" rpy="1.57 0 -1.57"/>
+	<geometry>
+	<mesh
+          filename="package://lle_description/meshes/left_leg.STL" />
+	</geometry>  
+	</collision>
+	<inertial>
+	<mass
+        value="0.21595" />
+      <inertia
+        ixx="0.0044098"
+        ixy="6.0023E-08"
+        ixz="6.8343E-10"
+        iyy="0.0043362"
+        iyz="-9.425E-05"
+        izz="8.6947E-05" />
+	</inertial>
+</link>
+
+<joint name="j_knee_l" type="revolute">
+	<parent link="left_femur"/>
+	<child link="left_leg"/>
+	<origin xyz="0.075 0.015 -0.409" rpy="0 0 0"/>
+	<axis xyz="1 0 0"/>
+ 	<limit effort="30" velocity="0.5" lower="-2.5" upper="2.5" />
+</joint>
+
+<link name="left_foot">
+        <visual>
+        <origin xyz="0.0 0.00 0" rpy="1.57 0 1.57"/>
+        <geometry>
+        <mesh
+          filename="package://lle_description/meshes/left_foot.STL" />
+        </geometry> 
+	<material name="darkgray">
+	<color rgba=".2 .2 .2 1"/>
+	</material>
+        </visual>
+	<collision>
+	<origin xyz="0.0 0.00 0" rpy="1.57 0 1.57"/>
+	<geometry>
+	<mesh
+          filename="package://lle_description/meshes/left_foot.STL" />         
+	</geometry>  
+	</collision>
+	<inertial>
+	 <mass
+        value="0.11504" />
+      <inertia
+      ixx="0.00029867"
+        ixy="-0.00010337"
+        ixz="5.7733E-05"
+        iyy="0.00044294"
+        iyz="6.4408E-05"
+        izz="0.00039778" />
+	</inertial>
+</link>
+
+<joint name="j_foot_l" type="revolute">
+<parent link="left_leg"/>
+<child link="left_foot"/>
+<origin xyz="0 0 -0.403" rpy="0 0 0"/>
+ <limit effort="10" velocity="0.5" lower="-1" upper="1" />
+<axis xyz="1 0 0"/>
+</joint>
+
+<transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_hip_r">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_hip_l">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_knee_r">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_knee_l">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<transmission name="tran5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_foot_l">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+</transmission>
+<transmission name="tran6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="j_foot_r">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor6">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+</transmission>
+</robot>

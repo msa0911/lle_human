@@ -1,0 +1,117 @@
+﻿<robot>
+
+  <!-- ros_control plugin -->
+  <gazebo>
+
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>lle</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+
+    </plugin>
+</gazebo>
+
+
+
+
+  <!-- Base Link -->
+  <gazebo reference="base_link">
+<kp>6000000.0</kp>
+<kd>10000000.0</kd>
+    <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+  <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <!-- Right Femur-->
+  <gazebo reference="right_femur">
+<kp>6000000.0</kp>
+<kd>10000000.0</kd>
+  <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <!-- Right Leg-->
+  <gazebo reference="right_leg">
+<kp>6000000.0</kp>
+<kd>10000000.0</kd>
+  <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <!-- Right Foot -->
+  <gazebo reference="right_foot">
+<kp>6000000.0</kp>
+<kd>10000000.0</kd>
+  <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+ <!-- Left Femur-->
+<gazebo reference="left_femur">
+<kp>6000000.0</kp>
+<kd>10000000.0</kd>
+  <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <!-- Left Leg-->
+  <gazebo reference="left_leg">
+<kp>6000000.0</kp>
+<kd>10000000.0</kd>
+  <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+<material>Gazebo/Orange</material>
+  </gazebo>
+
+<!-- Left foot-->
+ <gazebo reference="left_foot">
+<kp>6000000.0</kp>
+<kd>10000000.0</kd>
+  <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+<material>Gazebo/Yellow</material>
+ </gazebo>
+
+<!-- human left calf-->
+<gazebo reference="human_calf_left">
+<material>Gazebo/Red</material>
+</gazebo>
+
+<gazebo reference="human_calf_right">
+<material>Gazebo/Red</material>
+</gazebo>
+
+ 
+<gazebo reference="human_tight_left">
+<material>Gazebo/Red</material>
+</gazebo>
+
+<gazebo reference="human_tight_right">
+<material>Gazebo/Red</material>
+</gazebo>
+
+<gazebo reference="human_foot_left">
+<material>Gazebo/Red</material>
+</gazebo>
+
+<gazebo reference="human_foot_right">
+<material>Gazebo/Red</material>
+</gazebo>
+
+<gazebo reference="j_hip_l">
+    <provideFeedback>true</provideFeedback>
+</gazebo>
+<gazebo>
+
+<plugin name="ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+        <updateRate>100.0</updateRate>
+        <topicName>j_hip_l_sensor_topic</topicName>
+        <jointName>j_hip_l</jointName>
+    </plugin>
+</gazebo>
+
+</robot>

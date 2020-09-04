@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<robot>
+<!--bar-->
+
+<link name="bar_right">
+	<visual>
+              <origin xyz="0.3 3 1.02" rpy="0 0 0"/>
+             	<geometry>
+             	 	<box size="0.05 7 0.05"/>              
+             	</geometry>
+              <material name="blue">
+              <color rgba="0 0 1 1"/>              
+              </material>
+	</visual> 
+	<collision>
+		<origin xyz="0.3 3 1.02" rpy="0 0 0"/>
+         	<geometry>
+              		<box size="0.05 7 0.05"/>           
+        	</geometry>
+	</collision>
+	<inertial>
+ 		<mass value="20.25"/>
+		<inertia ixx="15.192" ixy="0" ixz="0" iyx="0" iyy="0.0084375" iyz="0" izx="0" izy="0" izz="15.192"/>
+	</inertial>
+</link>
+
+
+<link name="bar_right_back">
+	<visual>
+              <origin xyz="0.3 2.2 0.488" rpy="1.57 0 0"/>
+             	<geometry>
+             	 	<box size="0.05 1.02 0.05"/>              
+             	</geometry>
+              <material name="red">
+              <color rgba="0 0 1 1"/>              
+              </material>
+	</visual> 
+	<collision>
+		 <origin xyz="0.3 2.2 0.488" rpy="1.57 0 0"/>
+         	<geometry>
+              		<box size="0.05 1.02 0.05"/>               
+        	</geometry>
+	</collision>
+	<inertial>
+ 		<mass value="6.88"/>
+		<inertia ixx="0.5983" ixy="0" ixz="0" iyx="0" iyy="0.0028688" iyz="0" izx="0" izy="0" izz="0.5983"/>
+	</inertial>
+</link>
+
+<joint name="bar_right_back_joint" type="fixed">
+    <parent link="bar_right"/>
+    <child link="bar_right_back"/>
+</joint>
+
+
+<link name="bar_right_mid">
+	<visual>
+              <origin xyz="0.3 -0.2 0.488" rpy="1.57 0 0"/>
+             	<geometry>
+             	 	<box size="0.05 1.02 0.05"/>              
+             	</geometry>
+              <material name="red">
+              <color rgba="0 0 1 1"/>              
+              </material>
+	</visual> 
+	<collision>
+		<origin xyz="0.3 -0.2 0.488" rpy="1.57 0 0"/>
+         	<geometry>
+              		<box size="0.05 1.02 0.05"/>              
+        	</geometry>
+	</collision>
+	<inertial>
+ 		<mass value="6.88"/>
+		<inertia ixx="0.5983" ixy="0" ixz="0" iyx="0" iyy="0.0028688" iyz="0" izx="0" izy="0" izz="0.5983"/>
+	</inertial>
+</link>
+
+<joint name="bar_right_mid_joint" type="fixed">
+    <parent link="bar_right"/>
+    <child link="bar_right_mid"/>
+</joint>
+
+
+<link name="bar_right_front">
+	<visual>
+              <origin xyz="0.3 6.2 0.488" rpy="1.57 0 0"/>
+             	<geometry>
+             	 	<box size="0.05 1.02 0.05"/>              
+             	</geometry>
+              <material name="red">
+              <color rgba="0 0 1 1"/>              
+              </material>
+	</visual> 
+	<collision>
+		<origin xyz="0.3 6.2 0.488" rpy="1.57 0 0"/>
+         	<geometry>
+              		<box size="0.05 1.02 0.05"/>              
+        	</geometry>
+	</collision>
+	<inertial>
+ 		<mass value="6.88"/>
+		<inertia ixx="0.5983" ixy="0" ixz="0" iyx="0" iyy="0.0028688" iyz="0" izx="0" izy="0" izz="0.5983"/>
+	</inertial>
+</link>
+
+<joint name="bar_right_front_joint" type="fixed">
+    <parent link="bar_right"/>
+    <child link="bar_right_front"/>
+</joint>
+
+
+<link name="bar_left">
+	<visual>
+              <origin xyz="-0.27 3 1.02" rpy="0 0 0"/>
+             	<geometry>
+             	 	<box size="0.05 7 0.05"/>              
+             	</geometry>
+              <material name="blue">
+              <color rgba="0 0 1 1"/>              
+              </material>
+	</visual> 
+	<collision>
+		<origin xyz="-0.27 3 1.02" rpy="0 0 0"/>
+         	<geometry>
+              		<box size="0.05 7 0.05"/>         
+        	</geometry>
+	</collision>
+	<inertial>
+ 		<mass value="20.25"/>
+		<inertia ixx="15.192" ixy="0" ixz="0" iyx="0" iyy="0.0084375" iyz="0" izx="0" izy="0" izz="15.192"/>
+	</inertial>
+</link>
+
+
+
+<link name="bar_left_back">
+	<visual>
+              <origin xyz="-0.27 2.2 0.488" rpy="1.57 0 0"/>
+             	<geometry>
+             	 	<box size="0.05 1.02 0.05"/>              
+             	</geometry>
+              <material name="red">
+              <color rgba="0 0 1 1"/>              
+              </material>
+	</visual> 
+	<collision>
+		 <origin xyz="-1.27 2.2 0.488" rpy="1.57 0 0"/>
+         	<geometry>
+              		<box size="0.05 1.02 0.05"/>                
+        	</geometry>
+	</collision>
+	<inertial>
+ 		<mass value="6.88"/>
+		<inertia ixx="0.5983" ixy="0" ixz="0" iyx="0" iyy="0.0028688" iyz="0" izx="0" izy="0" izz="0.5983"/>
+	</inertial>
+</link>
+
+<joint name="bar_left_back_joint" type="fixed">
+    <parent link="bar_left"/>
+    <child link="bar_left_back"/>
+</joint>
+
+
+<link name="bar_left_mid">
+	<visual>
+              <origin xyz="-0.27 -0.2 0.488" rpy="1.57 0 0"/>
+             	<geometry>
+             	 	<box size="0.05 1.02 0.05"/>                
+             	</geometry>
+              <material name="red">
+              <color rgba="0 0 1 1"/>              
+              </material>
+	</visual> 
+	<collision>
+		<origin xyz="-0.27 -0.2 0.488" rpy="1.57 0 0"/>
+         	<geometry>
+              		<box size="0.05 1.02 0.05"/>                      
+        	</geometry>
+	</collision>
+	<inertial>
+ 		<mass value="6.88"/>
+		<inertia ixx="0.5983" ixy="0" ixz="0" iyx="0" iyy="0.0028688" iyz="0" izx="0" izy="0" izz="0.5983"/>
+	</inertial>
+</link>
+
+<joint name="bar_left_mid_joint" type="fixed">
+    <parent link="bar_left"/>
+    <child link="bar_left_mid"/>
+</joint>
+</robot>

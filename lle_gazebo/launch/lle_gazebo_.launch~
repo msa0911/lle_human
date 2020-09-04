@@ -1,0 +1,23 @@
+﻿<launch>
+  <!-- We resume the logic in gazebo_ros package empty_world.launch, -->
+  <!-- changing only the name of the world to be launched -->
+
+<include file="$(find lle_sample_control)/launch/lle_sample_control2_new.launch" />
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+   <arg name="world_name" value="worlds/empty.world"/>
+    <arg name="paused" value="true"/>
+  
+
+  </include>
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description"
+	 command="$(find xacro)/xacro.py '$(find lle_sample_description)/urdf/lle_sample5.xacro'" />
+
+   <!-- Spawn lle_sample into Gazebo -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+     args="-param robot_description -urdf -model lle" />
+
+<node name="lle_walker" pkg="lle_sample_gazebo" type="walker.py" />
+</launch>

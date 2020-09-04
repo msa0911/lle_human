@@ -1,0 +1,18 @@
+<launch>
+
+   <param name="robot_description" textfile="$(find lle_description)/urdf/lle.urdf" />  
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="worlds/empty.world"/>
+    <arg name="paused" value="true"/>
+    
+  </include>
+  
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find lle_description)/urdf/lle.urdf -urdf -model lle -z 0.09" />
+
+
+  <include file="$(find lle_control)/launch/lle_control.launch"/>
+
+  <node name="lle_walker" pkg="lle_gazebo" type="walker.py" />
+
+</launch>
